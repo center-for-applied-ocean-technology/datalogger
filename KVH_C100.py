@@ -48,7 +48,8 @@ class KVH_C100(BaseSensor):
 
 				dataSet = {	"heading": float(data[1]),
 						}
-				State.setHeading(datetime.now(),float(data[1]))
+				State.update(self.sensor, dataSet)
+				
 				static = None
 				break
 				

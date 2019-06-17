@@ -4,7 +4,7 @@ import time
 import threading
 from ConfigParser import ConfigParser
 import serial
-import State
+#import State
 from subprocess import call,PIPE,Popen
 from subprocess import check_output 
 from TsHardware import TsHardware
@@ -15,6 +15,7 @@ import logging
 
 t_start = '{:%Y-%m-%d %H:%M:%S}'.format(datetime.now())
 
+state = {}
 def read_config (ini_file):
 	config=ConfigParser()
 	config.read(ini_file)
@@ -27,15 +28,15 @@ ts = TsHardware()
 #read ini file
 threads = []
 id = 1
-#config = read_config("buoy.ini")
-config = read_config("test.ini")
-#logging.debug('using test.ini');
+
+config = read_config("buoy.ini")
+
 
 interval = config.getint('Main','Interval');
 logfile = config.get('Main','LogFile')
 loglevel = eval("logging." + config.get('Main','LogLevel'))
 watchdog = config.getboolean('Main','watchdog');
-State.enabled = config.getboolean('Main', 'webInterface');
+#State.enabled = config.getboolean('Main', 'webInterface');
 
 #setup logger
 logging.basicConfig(filename=logfile,level=loglevel,
